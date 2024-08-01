@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+/* Estilos CSS */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #f5f7fd;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff; /* Cambiado a blanco para mejorar la visibilidad */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+  background-image: url('fondo.png'); 
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+  background-position: center; /* Centra la imagen */
+  min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana del navegador */
+  background-position: center center; /* Centra la imagen en ambos ejes */
+  background-attachment: fixed; /* Fija la imagen de fondo para evitar que se desplace al hacer scroll */
+}
+
+.content {
+  text-align: center;
+  background-color: #a091c3; /* Fondo oscuro */
+  padding: 20px;
+  border-radius: 20px;
+  width: 90%; /* Cambiado a porcentaje para ser responsive */
+  max-width: 900px;
+  margin: 20px; /* Añadido margen para separar del borde del cuerpo */
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 40px;
+  text-align: center;
+  margin: 20px;
+  color: #0c0b0b; /* Texto blanco */
+  color: #fff;
+}
+
+h3 span {
+  color: #0730c5; /* Color de resaltado */
+}
+.container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centrar los contenedores */
+  margin-top: 20px;
+}
+
+.drop-area {
+  width: 100%; /* Cambiado a 100% para ser responsive */
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+}
+
+.drop-area {
+  width: 100%;
+
+  text-align: center;
+  flex: 1;
+  margin: 10px 0; /* Espacio entre los contenedores */
+  border: 2px dashed #0730c5;
+  box-sizing: border-box; /* El borde se incluye en el ancho y alto del contenedor */
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: all .1s ease-in;
+  background-color: #522f65; /* Fondo oscuro */
+}
+.drop-area:hover{
+  scale: 0.995;
+  opacity: 0.6;
+  filter: brightness(0.5);
+}
+
+#form{
+  width: 100%; /* Cambiado a 100% para ser responsive */
+  height: 400px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.file-input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+form p{
+  color: #fff; /* Cambiado a blanco para mejorar la visibilidad */
+}
+
+.Btn{
+  background-color: #0730c5;
+  z-index: 2; /* Superpone en el index */
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 150px;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  border: none;
+}
+
+.container2 {
+  flex: 1;
+  box-sizing: border-box; /* El borde se incluye en el ancho y alto del contenedor */
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px 20px;
+  background-color: #603b74; /* Fondo oscuro */
+  max-height: 430px;
+  overflow-y: auto;
+  width: 100%; /* Cambiado a 100% para ser responsive */
+  position: relative;
+  width: 100%;
+}
+
+.btn-abrir-directorio {
+  background-color: #0730c5;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  position: absolute; /* Posicionamiento absoluto */
+  bottom: 10px; /* Alinea el botón con la parte inferior del contenedor */
+  right: 10px; /* Alinea el botón con el borde derecho del contenedor */
+  transition: background-color 0.3s ease;
+}
+
+.btn_delete {
+  border: 2px solid orange; /* Borde de 2px sólido naranja */
+  padding: 5px 10px; /* Ajuste del padding para mayor comodidad */
+  background: none; /* Fondo transparente */
+  color: orange; /* Texto naranja */
+  cursor: pointer;
+  border-radius: 5px; /* Borde redondeado */
+  transition: background-color 0.3s ease; /* Efecto de transición al pasar el ratón */
+}
+
+.btn_delete:hover {
+  background-color: rgba(255, 165, 0, 0.2); /* Cambio de color de fondo al pasar el ratón */
+}
+
+
+.archivos_subidos{
+  display: flex;
+  justify-content: space-between;
+  background: #634f6e; /* Fondo oscuro */
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  align-items: center; 
+}
+.archivos_subidos:hover {
+  box-shadow: 0 0 10px -2px #d3d6f6;
+}
+.archivos_subidos div {
+  overflow: hidden;
+}
+.archivos_subidos a {
+  color: white; /* Cambia el color del texto a blanco */
+  font-size: 16px; /* Ajusta el tamaño del texto según tus preferencias */
+  
+}
+
+.beta{
+
+  background: #d90a0a;
+  background: #3823da;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  display: inline-block;
+  padding: 0 12px;
+}
+
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 768px) {
+  .content {
+    width: 90%; /* Reducir el ancho para adaptarse a pantallas más pequeñas */
+  }
+
+  .container {
+    flex-direction: column; /* Cambiar a disposición de columna en dispositivos móviles */
+  }
+
+  .drop-area {
+    width: 90%; /* Reducir el ancho para adaptarse a pantallas más pequeñas */
+  }
+
+  #form {
+    width: 90%; /* Reducir el ancho para adaptarse a pantallas más pequeñas */
+  }
+
+  .container2 {
+    width: 90%; /* Reducir el ancho para adaptarse a pantallas más pequeñas */
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
