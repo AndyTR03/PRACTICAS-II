@@ -156,21 +156,17 @@ form p {
   position: relative;
 }
 
-
 .btn-abrir-directorio-fixed {
-  background-color: #cc901f;
-  color: #1e12be;
+  background-color: #0730c5;
+  color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
   transition: background-color 0.3s ease;
 }
 
 .btn-abrir-directorio-fixed:hover {
-  background-color: #b9152b;
+  background-color: #0527a7;
 }
 
 .btn_delete {
@@ -198,9 +194,8 @@ form p {
   overflow: hidden; /* Asegúrate de que el contenido no se desborde */
 }
 
-
 .archivos_subidos:hover {
-  box-shadow: 0 0 10px 0px #d3d6f6;
+  box-shadow: 0 0 10px -2px #d3d6f6;
 }
 
 .archivos_subidos div {
@@ -224,6 +219,7 @@ img, .icon {
   max-width: 100%;
   height: auto;
 }
+
 .boton-descargar {
   color: white;
   font-size: 10%; /* Ajusta el tamaño del texto aquí */
@@ -236,6 +232,7 @@ img, .icon {
 .boton-descargar:hover {
   text-decoration: underline; /* Opcional: agregar subrayado al pasar el ratón */
 }
+
 .btn-container {
   position: sticky; /* Cambia a sticky para que se mantenga visible al hacer scroll */
   bottom: 10px;
