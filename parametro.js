@@ -12,6 +12,7 @@ if (!carpetaNombre) {
     const urlConParametro = urlActual.includes("?") ? `${urlActual}&nombre=${carpetaNombre}` : `${urlActual}?nombre=${carpetaNombre}`;
     // Redirige a la nueva URL con el parámetro 'nombre'
     window.location.href = urlConParametro;
+    
 }
 
 // Función para generar un número aleatorio de 3 dígitos

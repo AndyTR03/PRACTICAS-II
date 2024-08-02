@@ -1,0 +1,206 @@
+/* Reseteo de márgenes y rellenos, fuente predeterminada, y box-sizing para todos los elementos */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+/* Estilos del cuerpo de la página */
+body {
+  background: #f5f7fd; /* Color de fondo de la página */
+  font-size: 14px; /* Tamaño de la fuente */
+  font-weight: 400; /* Grosor de la fuente */
+  color: #fff; /* Color del texto */
+  text-align: center; /* Alineación del texto */
+  display: flex; /* Usar flexbox para alinear contenido */
+  align-items: center; /* Centrar contenido verticalmente */
+  flex-direction: column; /* Alinear elementos en columna */
+  margin-top: 40px; /* Margen superior */
+  background-image: url('fondo.png'); /* Imagen de fondo */
+  background-repeat: no-repeat; /* Evitar repetición de la imagen */
+  background-size: cover; /* Escalar imagen para cubrir todo el fondo */
+  background-position: center; /* Centrar la imagen de fondo */
+  min-height: 100vh; /* Altura mínima del viewport */
+  background-attachment: fixed; /* Mantener la imagen fija al hacer scroll */
+}
+
+/* Estilos del contenedor principal */
+.content {
+  text-align: center; /* Alinear texto al centro */
+  background-color: #a091c3; /* Color de fondo del contenedor */
+  padding: 5%; /* Espaciado interior */
+  border-radius: 5%; /* Bordes redondeados */
+  width: 90%; /* Ancho del contenedor */
+  max-width: 1200px; /* Ancho máximo */
+  margin: 1% auto; /* Centrar el contenedor con margen superior e inferior */
+}
+
+/* Estilos del título principal */
+h1 {
+  font-weight: 600; /* Grosor de la fuente */
+  font-size: 3rem; /* Tamaño de la fuente */
+  color: #fff; /* Color del texto */
+  margin: 1%; /* Margen alrededor del título */
+}
+
+/* Estilos de subtítulos con color personalizado */
+h3 span {
+  color: #0730c5; /* Color de texto para el span dentro del h3 */
+}
+
+/* Contenedor flexible para elementos internos */
+.container, .division {
+  display: flex; /* Usar flexbox para organizar elementos */
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan en varias líneas */
+  justify-content: space-between; /* Espacio entre los elementos */
+  margin-top: 5%; /* Margen superior */
+  width: 100%; /* Ancho completo del contenedor */
+}
+
+/* Estilos para áreas de arrastre y contenedores secundarios */
+.drop-area, .container2 {
+  flex: 1; /* Cada uno ocupa el mismo espacio */
+  margin: 10px; /* Margen alrededor de cada área */
+  min-width: 0; /* Evita que el contenido se desborde */
+}
+
+/* Estilos para pantallas pequeñas */
+@media only screen and (max-width: 768px) {
+  .container, .division {
+    flex-direction: column; /* Cambia a una disposición en columna */
+  }
+  .drop-area, .container2 {
+    width: 100%; /* Ancho completo para cada elemento */
+    margin: 10px 0; /* Margen solo arriba y abajo */
+  }
+}
+
+/* Estilos para el área de arrastre de archivos */
+.drop-area {
+  text-align: center; /* Centrar texto */
+  border: 3px dashed #0730c5; /* Borde punteado */
+  border-radius: 5%; /* Bordes redondeados */
+  display: flex; /* Flexbox para centrar contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  flex-direction: column; /* Organizar contenido en columna */
+  align-items: center; /* Centrar verticalmente */
+  position: relative; /* Posición relativa para capas */
+  transition: all .1s ease-in; /* Transición suave */
+  background-color: #522f65; /* Color de fondo */
+  padding: 20px; /* Espaciado interno */
+}
+
+/* Efectos al pasar el ratón sobre el área de arrastre */
+.drop-area:hover {
+  transform: scale(0.995); /* Reducir tamaño ligeramente */
+  opacity: 0.6; /* Reducir opacidad */
+  filter: brightness(0.5); /* Reducir brillo */
+}
+
+/* Estilos para otra área de arrastre de archivos */
+.drop-area2 {
+  width: 100%; /* Ancho completo */
+  text-align: center; /* Centrar texto */
+  padding: 10px; /* Espaciado interno */
+  border: 2px dashed #0730c5; /* Borde punteado */
+  border-radius: 5%; /* Bordes redondeados */
+  display: flex; /* Flexbox para centrar contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  flex-direction: column; /* Organizar en columna */
+  align-items: center; /* Centrar verticalmente */
+  position: relative; /* Posición relativa para capas */
+  transition: all .1s ease-in; /* Transición suave */
+}
+
+/* Estilos del formulario de carga de archivos */
+#form {
+  width: 100%; /* Ancho completo */
+  height: 400px; /* Altura fija */
+  position: relative; /* Posición relativa */
+  display: flex; /* Flexbox para centrar contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  flex-direction: column; /* Organizar contenido en columna */
+}
+
+/* Estilos del campo de entrada de archivos (oculto) */
+.file-input {
+  position: absolute; /* Posicionamiento absoluto dentro del formulario */
+  top: 0; /* Posición en la parte superior */
+  left: 0; /* Posición en la parte izquierda */
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Altura completa */
+  opacity: 0; /* Ocultar campo de entrada */
+  cursor: pointer; /* Cambiar cursor al pasar sobre el campo */
+  z-index: 1; /* Colocar campo en la parte superior */
+}
+
+/* Estilos para el texto dentro del formulario */
+form p {
+  color: #fff; /* Color del texto */
+}
+
+/* Estilos del botón principal */
+.Btn {
+  background-color: #0730c5; /* Color de fondo */
+  z-index: 2; /* Colocar el botón en la parte superior */
+  display: flex; /* Flexbox para centrar contenido */
+  align-items: center; /* Centrar verticalmente */
+  height: 30px; /* Altura fija */
+  width: 150px; /* Ancho fijo */
+  justify-content: center; /* Centrar horizontalmente */
+  text-align: center; /* Centrar texto */
+  border-radius: 10px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+}
+
+/* Estilos del contenedor de archivos subidos */
+.container2 {
+  background-color: #603b74; /* Color de fondo */
+  max-height: 430px; /* Altura máxima */
+  overflow-y: auto; /* Habilitar desplazamiento vertical */
+  padding: 3%; /* Espaciado interno */
+  border-radius: 5%; /* Bordes redondeados */
+  display: flex; /* Flexbox para organizar contenido */
+  flex-direction: column; /* Organizar en columna */
+  position: relative; /* Posición relativa */
+}
+
+/* Estilos del botón fijo para abrir directorio */
+.btn-abrir-directorio-fixed {
+  background-color: #cc901f; /* Color de fondo */
+  color: #1e12be; /* Color del texto */
+  padding: 10px 20px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  text-decoration: none; /* Sin subrayado */
+  position: absolute; /* Posicionamiento absoluto dentro del contenedor */
+  bottom: 10px; /* Posición en la parte inferior */
+  right: 10px; /* Posición en la parte derecha */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+/* Efecto al pasar el ratón sobre el botón fijo */
+.btn-abrir-directorio-fixed:hover {
+  background-color: #b9152b; /* Cambiar color de fondo */
+}
+
+/* Estilos del botón para eliminar archivos */
+.btn_delete {
+  border: 2px solid orange; /* Borde con color naranja */
+  padding: 5px 10px; /* Espaciado interno */
+  background: none; /* Sin fondo */
+  color: orange; /* Color del texto */
+  cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+/* Efecto al pasar el ratón sobre el botón de eliminar */
+.btn_delete:hover {
+  background-color: rgba(255, 165, 0, 0.2); /* Fondo naranja con opacidad */
+}
+
+/* Estilos de los archivos subidos */
