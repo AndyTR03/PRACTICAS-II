@@ -1,9 +1,11 @@
 <?php
-$carpetaNombre = isset($_GET['nombre']) ? $_GET['nombre'] : '';
+// Obtener el parámetro 'nombre' desde GET o POST
+$carpetaNombre = isset($_GET['nombre']) ? $_GET['nombre'] : (isset($_POST['nombre']) ? $_POST['nombre'] : '');
 $carpetaRuta = "./descarga/" . $carpetaNombre;
 $mensaje = '';
 
 try {
+    // Crear la carpeta si no existe
     if (!file_exists($carpetaRuta)) {
         mkdir($carpetaRuta, 0755, true);
         $mensaje = "Carpeta '$carpetaNombre' creada con éxito.";
@@ -12,6 +14,7 @@ try {
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Manejar la subida de archivos
         if (isset($_FILES['archivos'])) {
             $archivos = $_FILES['archivos'];
 
@@ -28,6 +31,7 @@ try {
             }
         }
 
+        // Manejar la eliminación de archivos
         if (isset($_POST['eliminarArchivo'])) {
             $archivoAEliminar = $_POST['eliminarArchivo'];
             $archivoRutaAEliminar = $carpetaRuta . '/' . $archivoAEliminar;
@@ -46,7 +50,10 @@ try {
 } catch (Exception $e) {
     $mensaje = "Error: " . htmlspecialchars($e->getMessage());
 }
+
+echo $mensaje;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -56,12 +63,13 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compartir archivos</title>
     <link rel="stylesheet" href="estilos.css">
+    <script src="parametro.js" defer></script>
 </head>
 
 <body>
     <h1>Compartir archivos <sup class="beta">BETA</sup></h1>
     <div class="content">
-        <h3>Sube tus archivos y comparte este enlace temporal: <span>ibu.pe/<?php echo htmlspecialchars($carpetaNombre); ?></span></h3>
+        <h3>Sube tus archivos y comparte este enlace temporal: <span><?php echo htmlspecialchars($carpetaNombre); ?></span></h3>
         <div class="container">
             <div class="drop-area" id="drop-area">
                 <form action="" id="form" method="POST" enctype="multipart/form-data">
