@@ -1,6 +1,6 @@
 <?php
 // Obtener el parámetro 'nombre' desde GET o POST
-$carpetaNombre = isset($_GET['nombre']) ? $_GET['nombre'] : (isset($_POST['nombre']) ? $_POST['nombre'] : '');
+$carpetaNombre = $_GET['nombre'] ?? ($_POST['nombre'] ?? '');
 $carpetaRuta = "./descarga/" . $carpetaNombre;
 $mensaje = '';
 
@@ -54,7 +54,6 @@ try {
 echo $mensaje;
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -69,50 +68,49 @@ echo $mensaje;
 <body>
     <h1>Compartir archivos <sup class="beta">BETA</sup></h1>
     <div class="content">
-        <h3>Sube tus archivos y comparte este enlace temporal: <span><?php echo htmlspecialchars($carpetaNombre); ?></span></h3>
+        <h3>Sube tus archivos y comparte este enlace temporal: <span>ibu.pe/<?php echo htmlspecialchars($carpetaNombre); ?></span></h3>
         <div class="container">
             <div class="drop-area" id="drop-area">
                 <form action="" id="form" method="POST" enctype="multipart/form-data">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" style="fill:#0730c5;"><path d="M13 19v-4h3l-4-5-4 5h3v4z"></path><path d="M7 19h2v-2H7c-1.654 0-3-1.346-3-3 0-1.404 1.199-2.756 2.673-3.015l.581-.102.192-.558C8.149 8.274 9.895 7 12 7c2.757 0 5 2.243 5 5v1h1c1.103 0 2 .897 2 2s-.897 2-2 2h-3v2h3c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5z"></path></svg> <br>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" style="fill:#0730c5;">
+                        <path d="M13 19v-4h3l-4-5-4 5h3v4z"></path>
+                        <path d="M7 19h2v-2H7c-1.654 0-3-1.346-3-3 0-1.404 1.199-2.756 2.673-3.015l.581-.102.192-.558C8.149 8.274 9.895 7 12 7c2.757 0 5 2.243 5 5v1h1c1.103 0 2 .897 2 2s-.897 2-2 2h-3v2h3c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5z"></path>
+                    </svg> <br>
                     <input type="file" class="file-input" name="archivos[]" id="archivo" multiple onchange="document.getElementById('form').submit()">
                     <label> Arrastra tus archivos aquí<br>o</label>
-                    <p><b>Abre el explorador</b></p> 
-
+                    <p><b>Abre el explorador</b></p>
                 </form>
             </div>
 
             <div class="container2">
                 <div id="file-list" class="pila">
                     <?php
-                    $targetDir = $carpetaRuta;
-
-                    if (is_dir($targetDir)) {
-                        $files = scandir($targetDir);
-                        $files = array_diff($files, array('.', '..'));
+                    if (is_dir($carpetaRuta)) {
+                        $files = array_diff(scandir($carpetaRuta), ['.', '..']);
 
                         if (count($files) > 0) {
                             echo "<div class='container'>
-                                <h3 style='margin-bottom:10px;'>Archivos Subidos:</h3>
-                                </div>";
+                                    <h3 style='margin-bottom:10px;'>Archivos Subidos:</h3>
+                                  </div>";
 
                             foreach ($files as $file) {
                                 echo "<div class='archivos_subidos'>
-                                    <div>
-                                    <svg xmlns='http://www.w3.org/2000/svg' class='icon' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'>
-                                        <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
-                                        <path d='M3 4v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-10l-6 -4l-6 4z' />
-                                    </svg>
-                                    </div>
-                                    <div>
-                                    <a href='$carpetaRuta/$file' download class='boton-descargar'>$file</a>
-                                    </div>
-                                    <div>
-                                    <form action='' method='POST' style='display:inline;'>
-                                        <input type='hidden' name='eliminarArchivo' value='$file'>
-                                        <button type='submit' class='btn_delete'>Eliminar</button>
-                                    </form>
-                                    </div>
-                                </div>";
+                                        <div>
+                                            <svg xmlns='http://www.w3.org/2000/svg' class='icon' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+                                                <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
+                                                <path d='M3 4v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-10l-6 -4l-6 4z' />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <a href='$carpetaRuta/$file' download class='boton-descargar'>$file</a>
+                                        </div>
+                                        <div>
+                                            <form action='' method='POST' style='display:inline;'>
+                                                <input type='hidden' name='eliminarArchivo' value='$file'>
+                                                <button type='submit' class='btn_delete'>Eliminar</button>
+                                            </form>
+                                        </div>
+                                      </div>";
                             }
                         } else {
                             echo "No se han subido archivos.";

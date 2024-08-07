@@ -1,0 +1,12 @@
+# Habilitar la reescritura de URLs
+RewriteEngine On
+
+# Redirigir todas las solicitudes a index.php
+# Esto asegura que todas las URLs pasen por el script index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-z0-9]{3})$ index.php?nombre=$1 [QSA,L]
+
+# Opcional: Manejo de errores
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html

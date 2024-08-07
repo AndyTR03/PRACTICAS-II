@@ -9,30 +9,22 @@ function generarCadenaAleatoria() {
     return cadenaAleatoria;
 }
 
-// Obtén la URL actual
-const urlActual = window.location.href;
+// Verifica si el path contiene una carpeta con 3 caracteres alfanuméricos
+const urlActualPath = window.location.pathname;
+const urlPartes = urlActualPath.split('/');
+const carpetaActual = urlPartes[urlPartes.length - 1];
+const esCadenaAleatoria = /^[a-z0-9]{3}$/.test(carpetaActual);
 
-// Verifica si el parámetro 'nombre' ya está presente en la URL
-const parametros = new URLSearchParams(window.location.search);
-let carpetaNombre = parametros.get("nombre");
-
-if (!carpetaNombre) {
-    // Si 'nombre' no está presente, genera una cadena aleatoria
-    carpetaNombre = generarCadenaAleatoria();
-    // Redirige a la nueva URL con los dígitos generados
-    const urlConParametros = urlActual.split('?')[0]; // Eliminamos los parámetros de la URL actual
-    const urlConCadena = `${urlConParametros}?nombre=${carpetaNombre}`; // Redirigimos a la URL con los dígitos generados
-    window.location.href = urlConCadena;
+// Si la última parte del path no es una cadena aleatoria de 3 caracteres, redirige
+if (!esCadenaAleatoria) {
+    const nuevaCadena = generarCadenaAleatoria();
+    const nuevaUrl = `${window.location.origin}${window.location.pathname.replace(/[^\/]*$/, nuevaCadena)}`;
+    window.location.href = nuevaUrl;
 } else {
-    /* Actualiza la URL para ocultar el parámetro 'nombre'
-    const urlSinParametros = urlActual.split('?')[0]; // Eliminamos los parámetros de la URL actual
-    const urlConCadena = `${urlSinParametros}${carpetaNombre}`; // Agregamos los dígitos generados a la URL sin parámetros
-    window.history.replaceState({}, document.title, urlConCadena);
-    */ //Muestra la URL actual en el elemento <p>
-    document.getElementById('current-url').textContent = urlConCadena;
+    document.getElementById('current-url').textContent = window.location.href;
 }
 
-// Función para manejar archivos (especifica el origen del evento)
+// Función para manejar archivos
 function handleFile(files) {
     if (files.length > 0) {
         let formData = new FormData();
@@ -40,11 +32,8 @@ function handleFile(files) {
             formData.append('archivos[]', files[i]);
         }
 
-        // Obtén el nombre de la carpeta desde la URL actual
-        const urlPartes = window.location.pathname.split('/');
-        const carpetaNombre = urlPartes[urlPartes.length - 1]; // Asumimos que la carpeta nombre es la última parte del pathname
+        const carpetaNombre = carpetaActual; // Reutiliza el valor de carpetaActual
 
-        // Añade el parámetro 'nombre' al FormData
         if (carpetaNombre) {
             formData.append('nombre', carpetaNombre);
         }
