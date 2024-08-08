@@ -10,27 +10,33 @@ function generarCadenaAleatoria() {
 }
 
 // Verifica si el path contiene una carpeta con 3 caracteres alfanuméricos
-const urlActualPath = window.location.pathname;
-const urlPartes = urlActualPath.split('/');
-const carpetaActual = urlPartes[urlPartes.length - 1];
-const esCadenaAleatoria = /^[a-z0-9]{3}$/.test(carpetaActual);
+document.addEventListener('DOMContentLoaded', () => {
+    const urlActualPath = window.location.pathname;
+    const urlPartes = urlActualPath.split('/');
+    const carpetaActual = urlPartes[urlPartes.length - 1];
+    const esCadenaAleatoria = /^[a-z0-9]{3}$/.test(carpetaActual);
 
-// Si la última parte del path no es una cadena aleatoria de 3 caracteres, redirige
-if (!esCadenaAleatoria) {
-    const nuevaCadena = generarCadenaAleatoria();
-    const nuevaUrl = `${window.location.origin}${window.location.pathname.replace(/[^\/]*$/, nuevaCadena)}`;
-    window.location.href = nuevaUrl;
-} else {
-    document.getElementById('current-url').textContent = window.location.href;
-}
+    // Si la última parte del path no es una cadena aleatoria de 3 caracteres, redirige
+    if (!esCadenaAleatoria) {
+        const nuevaCadena = generarCadenaAleatoria();
+        const nuevaUrl = `${window.location.origin}${window.location.pathname.replace(/[^\/]*$/, nuevaCadena)}`;
+        window.location.href = nuevaUrl;
+    } else {
+        const currentUrlElement = document.getElementById('current-url');
+        if (currentUrlElement) {
+            currentUrlElement.textContent = window.location.href;
+        } else {
+            console.error('Elemento con id "current-url" no encontrado.');
+        }
+    }
+});
+
 
 // Función para manejar archivos
 function handleFile(files) {
     if (files.length > 0) {
         let formData = new FormData();
-        for (let i = 0; i < files.length; i++) {
-            formData.append('archivos[]', files[i]);
-        }
+        Array.from(files).forEach(file => formData.append('archivos[]', file));
 
         const carpetaNombre = carpetaActual; // Reutiliza el valor de carpetaActual
 

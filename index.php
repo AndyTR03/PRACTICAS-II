@@ -4,6 +4,13 @@ $carpetaNombre = $_GET['nombre'] ?? ($_POST['nombre'] ?? '');
 $carpetaRuta = "./descarga/" . $carpetaNombre;
 $mensaje = '';
 
+if (!preg_match('/^[a-z0-9]{3}$/', $carpetaNombre)) {
+    // Redirigir solo si el nombre de la carpeta no es una cadena aleatoria de 3 caracteres
+    $carpetaNombre = substr(str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789'), 0, 3);
+    header("Location: {$_SERVER['PHP_SELF']}?nombre=$carpetaNombre");
+    exit;
+}
+
 try {
     // Crear la carpeta si no existe
     if (!file_exists($carpetaRuta)) {
@@ -48,7 +55,7 @@ try {
         }
     }
 } catch (Exception $e) {
-    $mensaje = "Error: " . htmlspecialchars($e->getMessage());
+    $mensaje = htmlspecialchars($e->getMessage());
 }
 
 echo $mensaje;
@@ -56,22 +63,24 @@ echo $mensaje;
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compartir archivos</title>
+    <!-- Prefetch y Preconnect -->
+    <link rel="preconnect" href="https://your-cdn-url.com">
+    <link rel="dns-prefetch" href="//your-cdn-url.com">
     <link rel="stylesheet" href="estilos.css">
     <script src="parametro.js" defer></script>
 </head>
-
 <body>
     <h1>Compartir archivos <sup class="beta">BETA</sup></h1>
     <div class="content">
-        <h3>Sube tus archivos y comparte este enlace temporal: <span>ibu.pe/<?php echo htmlspecialchars($carpetaNombre); ?></span></h3>
+        <h3>Sube tus archivos y comparte este enlace temporal:<span id="current-url"></span></h3>
         <div class="container">
             <div class="drop-area" id="drop-area">
                 <form action="" id="form" method="POST" enctype="multipart/form-data">
+                    <!-- Optimizando la imagen SVG -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" style="fill:#0730c5;">
                         <path d="M13 19v-4h3l-4-5-4 5h3v4z"></path>
                         <path d="M7 19h2v-2H7c-1.654 0-3-1.346-3-3 0-1.404 1.199-2.756 2.673-3.015l.581-.102.192-.558C8.149 8.274 9.895 7 12 7c2.757 0 5 2.243 5 5v1h1c1.103 0 2 .897 2 2s-.897 2-2 2h-3v2h3c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5z"></path>
@@ -89,9 +98,7 @@ echo $mensaje;
                         $files = array_diff(scandir($carpetaRuta), ['.', '..']);
 
                         if (count($files) > 0) {
-                            echo "<div class='container'>
-                                    <h3 style='margin-bottom:10px;'>Archivos Subidos:</h3>
-                                  </div>";
+                            echo "<h3>Archivos Subidos:</h3>";
 
                             foreach ($files as $file) {
                                 echo "<div class='archivos_subidos'>
@@ -104,12 +111,10 @@ echo $mensaje;
                                         <div>
                                             <a href='$carpetaRuta/$file' download class='boton-descargar'>$file</a>
                                         </div>
-                                        <div>
-                                            <form action='' method='POST' style='display:inline;'>
-                                                <input type='hidden' name='eliminarArchivo' value='$file'>
-                                                <button type='submit' class='btn_delete'>Eliminar</button>
-                                            </form>
-                                        </div>
+                                        <form action='' method='POST' style='display:inline;'>
+                                            <input type='hidden' name='eliminarArchivo' value='$file'>
+                                            <button type='submit' class='btn_delete'>Eliminar</button>
+                                        </form>
                                       </div>";
                             }
                         } else {
@@ -120,9 +125,7 @@ echo $mensaje;
                     }
                     ?>
                 </div>
-                <div class="btn-container">
-                    <button class="btn-abrir-directorio-fixed" onclick="document.getElementById('archivo').click()">Agregar</button>
-                </div>
+                <button class="btn-abrir-directorio-fixed" onclick="document.getElementById('archivo').click()">Agregar</button>
             </div>
         </div>
     </div>
