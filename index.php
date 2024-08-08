@@ -4,13 +4,6 @@ $carpetaNombre = $_GET['nombre'] ?? ($_POST['nombre'] ?? '');
 $carpetaRuta = "./descarga/" . $carpetaNombre;
 $mensaje = '';
 
-if (!preg_match('/^[a-z0-9]{3}$/', $carpetaNombre)) {
-    // Redirigir solo si el nombre de la carpeta no es una cadena aleatoria de 3 caracteres
-    $carpetaNombre = substr(str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789'), 0, 3);
-    header("Location: {$_SERVER['PHP_SELF']}?nombre=$carpetaNombre");
-    exit;
-}
-
 try {
     // Crear la carpeta si no existe
     if (!file_exists($carpetaRuta)) {
